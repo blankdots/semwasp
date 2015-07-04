@@ -30,6 +30,7 @@
     "watch": "gulp watch"
   },
   "dependencies": {
+    "better-console": "^0.2.4",
     "browser-sync": "^2.7.13",
     "coffee-script": "^1.8.0",
     "gulp": "^3.9.0",

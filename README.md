@@ -6,9 +6,9 @@ Author: www.blankdots.com
 
 ### Instructions
 
-1. Clone the repository
+##### Clone the repository
 
-2. Install dependencies:
+##### Install dependencies:
 
 ```
 npm install
@@ -16,14 +16,14 @@ npm install
 
 > this will run `bower install` automatically with all necessary dependencies
 
-3. Develop:
+##### Develop:
 
 ```
 gulp watch
 ```
 The bower dependencies will be in the `.\dist\lib` folder (for each bower component the dependencies are copied in that folder)
 
-4. Build
+##### Build
 
 ```
 gulp build

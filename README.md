@@ -1,4 +1,4 @@
-## Static Webpage skeleton 
+## gulp-SemanticUIFrontEnd - Static Webpage skeleton 
 
 Static Webpage skeleton generated with gulp and supports semantic-ui from the start.
 

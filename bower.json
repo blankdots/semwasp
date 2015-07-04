@@ -1,0 +1,14 @@
+{
+  "name": "gulp-SemanticUIFrontEnd",
+  "version": "0.1.0",
+  "authors": [
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "semantic-ui": "~2.0.0"
+  }
+}

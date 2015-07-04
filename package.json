@@ -1,0 +1,51 @@
+{
+  "name": "gulp-SemanticUIFrontEnd",
+  "version": "0.1.0",
+  "description": "SemanticUIFrontEnd, front-end build environment for automating building awesome frontends",
+  "keywords": [
+    "gulp",
+    "jade",
+    "scss",
+    "sass",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blankdots/"
+  },
+  "author": {
+    "name": "blankdots",
+    "email": "blankdots@gmail.com",
+    "url": "http://blankdots.com"
+  },
+  "homepage": "https://github.com/blankdots/",
+  "bugs": {
+    "url": "https://github.com/blankdots",
+    "email": "blankdots@gmail.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "gulp build",
+    "watch": "gulp watch"
+  },
+  "dependencies": {
+    "browser-sync": "^2.7.13",
+    "coffee-script": "^1.8.0",
+    "gulp": "^3.9.0",
+    "gulp-changed": "^1.2.1",
+    "gulp-copy": "0.0.2",
+    "gulp-filter": "^2.0.2",
+    "gulp-header": "^1.2.2",
+    "gulp-help": "^1.6.0",
+    "gulp-if": "^1.2.5",
+    "gulp-jade": "^1.0.1",
+    "gulp-minify-css": "^0.5.1",
+    "gulp-sass": "^2.0.3",
+    "gulp-tasks": "0.0.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "gulp-watch": "^4.2.4",
+    "rimraf": "^2.4.1"
+  }
+}

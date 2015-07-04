@@ -1,4 +1,4 @@
-## gulp-SemanticUIFrontEnd - Static Webpage skeleton 
+## gulp-SemanticUIFrontEnd - Static Webpage skeleton  [![Build Status](https://travis-ci.org/blankdots/gulp-SemanticUIFrontEnd.svg?branch=master)](https://travis-ci.org/blankdots/gulp-SemanticUIFrontEnd)
 
 Static Webpage skeleton generated with gulp and supports semantic-ui from the start (consider it as work in progress).
 Makes use of following:

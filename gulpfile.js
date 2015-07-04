@@ -125,7 +125,7 @@ gulp.task('watch', ['build'], function () {
             domain: 'localhost:3000'
         },
         ui: {
-            port: 8080
+            port: 9001
         },
         port: 3000
 

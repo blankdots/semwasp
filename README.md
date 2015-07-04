@@ -8,6 +8,10 @@ Author: www.blankdots.com
 
 ##### Clone the repository
 
+```
+git clone git@github.com:blankdots/gulp-SemanticUIFrontEnd.git
+```
+
 ##### Install dependencies:
 
 ```
@@ -21,6 +25,9 @@ npm install
 ```
 gulp watch
 ```
+
+The browser will start a server at the address `http://localhost:3000` and the bower-sync at `http://localhost:9001` - both of these can be configured in the gulpfile.js file.
+
 The bower dependencies will be in the `.\dist\lib` folder (for each bower component the dependencies are copied in that folder)
 
 ##### Build

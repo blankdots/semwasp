@@ -19,7 +19,8 @@ var /* BEGIN ENVIRONMENT CONFIG */
     reload              = browsersync.reload,
     rimraf              = require('rimraf'),
     sass                = require('gulp-sass'),
-    uglify              = require('gulp-uglify');
+    uglify              = require('gulp-uglify'),
+    coffee              = require('gulp-coffee');
 
 
 /**
@@ -99,11 +100,17 @@ gulp.task('scripts', function () {
 
 });
 
+ 
+gulp.task('coffee', function() {
+  gulp.src('./src/js/*')
+    .pipe(gulpif(/[.]coffee$/, coffee()))
+    .pipe(gulp.dest(conf_script_dest));
+});
 
 /**
  * All build tasks.
  */
-gulp.task('build', ['style', 'templates', 'images', 'bower', 'scripts']);
+gulp.task('build', ['style', 'templates', 'images', 'bower', 'scripts','coffee']);
 
 
 /**

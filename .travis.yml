@@ -1,6 +1,9 @@
 language: node_js
-before_install: 
+before_install:
+	- npm install -g grunt-cli
 	- npm install -g gulp
 	- npm install -g bower
+install: npm install
 script:
   - "npm test"
+  - gulp build

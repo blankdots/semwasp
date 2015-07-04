@@ -1,6 +1,14 @@
 ## gulp-SemanticUIFrontEnd - Static Webpage skeleton 
 
-Static Webpage skeleton generated with gulp and supports semantic-ui from the start.
+Static Webpage skeleton generated with gulp and supports semantic-ui from the start (consider it as work in progress).
+Makes use of following:
+
+* gulp streaming build system http://gulpjs.com/
+* jade template engine http://jade-lang.com/
+* scss Sass http://sass-lang.com/
+* coffee-script http://coffeescript.org/
+* semantic-ui v2.0 http://www.semantic-ui.com/ - awesome User Interface development framework
+* browser-sync http://www.browsersync.io/ synchronised browser testing tool
 
 Author: www.blankdots.com
 
@@ -35,6 +43,8 @@ The bower dependencies will be in the `.\dist\lib` folder (for each bower compon
 ```
 gulp build
 ```
+
+The file build will be available in `.\dist` folder.
 
 ### License
 

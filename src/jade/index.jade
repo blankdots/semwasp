@@ -1,17 +1,12 @@
 doctype html
 html(lang="en")
   head
-    title Test Page
+    link(rel="stylesheet", type="text/css", href='lib/components/reset.min.css')
+    link(rel="stylesheet", type="text/css", href='lib/components/container.min.css')
+    link(rel="stylesheet", type="text/css", href='css/style.css')
+
+    title Semantic UI Front-End Page
   body
-    h1 Demo template engine
-    #container.col
-      if youAreUsingJade
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Jade is a terse and simple
-        templating language with a
-        strong focus on performance
-        and powerful features.
+
+  script(type='text/javascript', src='lib/jquery.min.js')
   script(type='text/javascript', src='js/main.js')

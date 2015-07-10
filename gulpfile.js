@@ -22,6 +22,10 @@ var /* BEGIN ENVIRONMENT CONFIG */
     uglify              = require('gulp-uglify'),
     coffee              = require('gulp-coffee');
 
+var paths = {
+      semanticui: ['./bower_components/semantic-ui/dist/**'],
+      jquery: ['./bower_components/jquery/dist/**']
+    };
 
 /**
  * Check to see if --vars were set.
@@ -79,12 +83,8 @@ gulp.task('images', function () {
  * Move bower components.
  */
 gulp.task('bower', function () {
-    gulp.src([
-        './bower_components/semantic-ui/dist/*',
-        './bower_components/jquery/dist/*'
-    ])
-        .pipe(gulp.dest(conf_bower_dest))
-        .pipe(reload({stream:true}));
+    gulp.src(paths.semanticui).pipe(gulp.dest(conf_bower_dest));
+    gulp.src(paths.jquery).pipe(gulp.dest(conf_bower_dest));
 });
 
 

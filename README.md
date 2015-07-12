@@ -8,7 +8,8 @@ Makes use of following:
 * scss Sass http://sass-lang.com/
 * coffee-script http://coffeescript.org/
 * semantic-ui v2.0 http://www.semantic-ui.com/ - awesome User Interface development framework
-* browser-sync http://www.browsersync.io/ synchronised browser testing tool
+* browser-sync http://www.browsersync.io/ synchronized browser testing tool
+* cucumber https://cucumber.io/ (Work in progress)
 
 Author: www.blankdots.com
 

@@ -1,12 +1,25 @@
 doctype html
 html(lang="en")
   head
-    link(rel="stylesheet", type="text/css", href='lib/components/reset.min.css')
-    link(rel="stylesheet", type="text/css", href='lib/components/container.min.css')
+    // build:css css/combinedLib.css
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/reset.min.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/container.min.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/modal.min.css')
+    // endbuild
+    // bower:css
+    // endbower
+    // build:css css/style.css
     link(rel="stylesheet", type="text/css", href='css/style.css')
-
+    // endbuild
     title Semantic UI Front-End Page
   body
 
-  script(type='text/javascript', src='lib/jquery.min.js')
+
+  // bower:js
+  // endbower
+  // build:js js/combinedLib.js
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/modal.min.js')
+  // endbuild
+  // build:js js/main.js
   script(type='text/javascript', src='js/main.js')
+  // endbuild

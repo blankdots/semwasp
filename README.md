@@ -40,11 +40,19 @@ The bower dependencies will be in the `.\dist\lib` folder (for each bower compon
 
 ##### Build
 
+Building output:
+
 ```
 gulp build
 ```
 
 The file build will be available in `.\dist` folder.
+
+In order to clean build use:
+
+```
+gulp clean
+```
 
 ### License
 

@@ -8,7 +8,10 @@
   ],
   "license": "MIT",
   "private": true,
+  "devDependencies": {
+    "semantic-ui": ">=2.0.0"
+  },
   "dependencies": {
-    "semantic-ui": "~2.0.0"
+    "semantic-ui": ">=2.0.0"
   }
 }

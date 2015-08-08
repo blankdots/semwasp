@@ -24,10 +24,9 @@ var /* BEGIN ENVIRONMENT CONFIG */
     useref              = require('gulp-useref'),
     wiredep             = require('wiredep').stream,
     minifyCss           = require('gulp-minify-css'),
-    paths               = {
-                      semanticui: ['./bower_components/semantic-ui/dist/**'],
-                      jquery: ['./bower_components/jquery/dist/**']
-                    };
+    paths               = { semanticui: ['./bower_components/semantic-ui/dist/**'],
+                            jquery: ['./bower_components/jquery/dist/**']
+                          };
 
 /**
  * Check to see if --vars were set.
@@ -60,9 +59,9 @@ gulp.task('templates', function () {
             locals: {},
             pretty: true
         }))
-        // .pipe(wiredep({
-        //   directory: './bower_components'
-        // }))
+        .pipe(wiredep({
+          directory: './bower_components'
+        }))
         .pipe(gulp.dest(conf_template_dest))
         .pipe(reload({stream:true}));
 });
@@ -106,24 +105,9 @@ gulp.task('coffee', function() {
 });
 
 /**
- * All build tasks.
- */
-gulp.task('html', ['style', 'coffee', 'scripts', 'templates'], function () {
-    var assets = useref.assets({searchPath: '{.src}'});
-    
-    return gulp.src('dist/*.html')
-        .pipe(assets)
-        .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss()))
-        .pipe(assets.restore())
-        .pipe(useref())
-        .pipe(gulp.dest(conf_url_dest));
-});
-
-/**
  * Build FrontEnd and distribute
  */
-gulp.task('build', ['html', 'images', 'bower','coffee']);
+gulp.task('build', ['style', 'templates', 'images', 'bower', 'scripts','coffee']);
 
 /**
  * Remove dist directory.
@@ -136,7 +120,7 @@ gulp.task('clean', function (cb) {
  * Watch for chaned files and develop in peace
  */
 // TODO: move html task only to build do not use build here
-gulp.task('watch', ['scripts', 'build'], function () {
+gulp.task('dev', ['build'], function () {
     browsersync.init({
         server: {
             baseDir: "./dist",
@@ -155,7 +139,7 @@ gulp.task('watch', ['scripts', 'build'], function () {
     gulp.watch('./src/js/*.js', ['scripts']); //in case there will be JavaScript
     gulp.watch('./src/js/*.coffee', ['coffee']);
     gulp.watch('./dist/*html').on('change', reload);
-    gulputil.log(gulputil.colors.inverse("Shazam! We're up and running."));
+    gulputil.log(gulputil.colors.inverse("All done! We're up and running."));
 });
 
 
@@ -166,6 +150,6 @@ gulp.task('default', function () {
     if (clean === true) {
         gulp.start(['clean']);
     } else {
-        gulp.start(['watch']);
+        gulp.start(['dev']);
     }
 });

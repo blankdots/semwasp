@@ -32,7 +32,7 @@ npm install
 ##### Develop:
 
 ```
-gulp watch
+gulp dev
 ```
 
 The browser will start a server at the address `http://localhost:3000` and the bower-sync at `http://localhost:9001` - both of these can be configured in the gulpfile.js file.

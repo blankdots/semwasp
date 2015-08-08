@@ -2,10 +2,10 @@ doctype html
 html(lang="en")
   head
     // build:css css/plugins.css
-    link(rel="stylesheet", type="text/css", href='lib/semantic.min.css')
-    link(rel="stylesheet", type="text/css", href='lib/components/reset.min.css')
-    link(rel="stylesheet", type="text/css", href='lib/components/site.css')
-    link(rel="stylesheet", type="text/css", href='lib/components/grid.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/semantic.min.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/reset.min.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/site.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/grid.css')
     // endbuild
     // bower:css
     // endbower
@@ -14,58 +14,16 @@ html(lang="en")
     // endbuild
     title Semantic UI Front-End Page
   body
-    .ui.three.column.stackable.grid
-      .column
-        h1 Heading 1
-        h2 Heading 2
-        h3 Heading 3
-        h4 Heading 4
-        h5 Heading 5
-        p
-          | Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-      .column
-        h2 Example body text
-        p
-          | Nullam quis risus eget
-          a(href="#") urna mollis ornare
-          | vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-        p
-          small This line of text is meant to be treated as fine print.
-        p
-          | The following snippet of text is
-          strong rendered as bold text
-          | .
-        p
-          | The following snippet of text is
-          em rendered as italicized text
-          | .
-        p
-          | An abbreviation of the word attribute is
-          abbr(title="attribute") attr
-          | .
-      .column
-        .ui.three.column.stackable.padded.middle.aligned.centered.color.grid
-          .red.column Red
-          .orange.column Orange
-          .yellow.column Yellow
-          .olive.column Olive
-          .green.column Green
-          .teal.column Teal
-          .blue.column Blue
-          .violet.column Violet
-          .purple.column Purple
-          .pink.column Pink
-          .brown.column Brown
-          .grey.column Grey
-          .black.column Black
+    include ./includes/basic.jade
+    include ./includes/menu.jade
 
-
-  // bower:js
-  // endbower
-  script(type='text/javascript', src='lib/jquery.min.js')
+  // build:js js/library.js
+  script(type='text/javascript', src='../bower_components/jquery/dist/jquery.min.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/semantic.min.js')
+  // endbuild
   // build:js js/plugins.js
-  script(type='text/javascript', src='lib/semantic.min.js')
-  script(type='text/javascript', src='lib/components/modal.min.js')
+
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/modal.min.js')
   // endbuild
   // build:js js/main.js
   script(type='text/javascript', src='js/main.js')

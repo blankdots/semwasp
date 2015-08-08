@@ -1,5 +1,6 @@
 var /* BEGIN ENVIRONMENT CONFIG */
     conf_bower_dest     = './dist/lib',                     // where to output the bower directory
+    conf_fonts_dest     = './dist/css/themes',              // where to output the fonts directory
     conf_image_dest     = './dist/img',                     // where to output images
     conf_output_dest    = './dist',                         // the base output directory
     conf_script_dest    = './dist/js',                      // where to output scripts
@@ -24,8 +25,10 @@ var /* BEGIN ENVIRONMENT CONFIG */
     useref              = require('gulp-useref'),
     wiredep             = require('wiredep').stream,
     minifyCss           = require('gulp-minify-css'),
+    load                = require('gulp-load-plugins')(),
     paths               = { semanticui: ['./bower_components/semantic-ui/dist/**'],
-                            jquery: ['./bower_components/jquery/dist/**']
+                            jquery: ['./bower_components/jquery/dist/**'],
+                            fonts: ['./bower_components/semantic-ui/dist/themes/**']
                           };
 
 /**
@@ -37,7 +40,6 @@ process.argv.forEach(function (val) {
     }
 });
 
-
 /**
  * Compile scss as compressed css.
  */
@@ -48,7 +50,6 @@ gulp.task('style', function () {
         .pipe(gulp.dest(conf_style_dest))
         .pipe(reload({stream:true}));
 });
-
 
 /**
  * Jade to html.
@@ -66,7 +67,6 @@ gulp.task('templates', function () {
         .pipe(reload({stream:true}));
 });
 
-
 /**
  * Move images.
  */
@@ -75,13 +75,20 @@ gulp.task('images', function () {
         .pipe(gulp.dest(conf_image_dest));
 });
 
-
 /**
- * Move bower components.
+ * Move bower components into library for the client.
+ Deprecated.
  */
 gulp.task('bower', function () {
     gulp.src(paths.semanticui).pipe(gulp.dest(conf_bower_dest));
     gulp.src(paths.jquery).pipe(gulp.dest(conf_bower_dest));
+});
+
+/**
+ * Move fonts components into css for the client.
+ */
+gulp.task('fonts', function () {
+    gulp.src(paths.fonts).pipe(gulp.dest(conf_fonts_dest));
 });
 
 
@@ -97,6 +104,9 @@ gulp.task('scripts', function () {
 
 });
 
+/**
+ * Coffeescript to javascript.
+ */
 gulp.task('coffee', function() {
   gulp.src('./src/js/*')
     .pipe(gulpif(/[.]coffee$/, coffee()))
@@ -105,10 +115,24 @@ gulp.task('coffee', function() {
 });
 
 /**
- * Build FrontEnd and distribute
+ * All build tasks.
  */
-gulp.task('build', ['style', 'templates', 'images', 'bower', 'scripts','coffee']);
+gulp.task('html', ['style', 'coffee', 'scripts', 'templates', 'images'], function () {
+    var assets = useref.assets({searchPath: '{.src, .bower_components}'});
+    return gulp.src('dist/*.html')
+        .pipe(assets)
+        .pipe(load.if('*.js', load.uglify()))
+        .pipe(load.if('*.css', load.minifyCss({compatibility: 'ie8'})))
+        .pipe(assets.restore())
+        .pipe(load.useref())
+        .pipe(load.if('*.html', load.minifyHtml({conditionals: true, loose: true})))
+        .pipe(gulp.dest(conf_url_dest));
+});
 
+/**
+ * Build FrontEnd and distribute.
+ */
+gulp.task('build', ['html','fonts']);
 /**
  * Remove dist directory.
  */
@@ -120,10 +144,13 @@ gulp.task('clean', function (cb) {
  * Watch for chaned files and develop in peace
  */
 // TODO: move html task only to build do not use build here
-gulp.task('dev', ['build'], function () {
+gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function () {
     browsersync.init({
         server: {
-            baseDir: "./dist",
+            baseDir:["./src", "./dist"],
+            routes: {
+                "/bower_components": "bower_components" // make bower_components accessible
+            }
         },
         socket: {
             domain: 'localhost:3000'

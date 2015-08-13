@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  head
+    // build:css css/vendor.css
+    // bower:css
+    // endbower
+    // endbuild
+    
+    // build:css css/plugins.css
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/semantic.min.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/reset.min.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/site.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/grid.css')
+    // endbuild
+    // bower:css
+    // endbower
+    // build:css css/style.css
+    link(rel="stylesheet", type="text/css", href='css/style.css')
+    // endbuild
+    title Semantic UI Front-End Page
+  body
+    include ./includes/basic.jade
+    include ./includes/menu.jade
+
+  // build:js js/vendor.js
+  // bower:js
+  // endbower
+  //endbuild
+
+  // build:js js/library.js
+  script(type='text/javascript', src='../bower_components/jquery/dist/jquery.min.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/semantic.min.js')
+  // endbuild
+  // build:js js/plugins.js
+
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/modal.min.js')
+  // endbuild
+  // build:js js/main.js
+  script(type='text/javascript', src='js/main.js')
+  // endbuild

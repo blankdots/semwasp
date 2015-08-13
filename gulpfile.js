@@ -25,9 +25,9 @@ var /* BEGIN ENVIRONMENT CONFIG */
     useref              = require('gulp-useref'),
     wiredep             = require('wiredep').stream,
     minifyCss           = require('gulp-minify-css'),
-    load                = require('gulp-load-plugins')(),
-    paths               = { semanticui: ['./bower_components/semantic-ui/dist/**'],
-                            jquery: ['./bower_components/jquery/dist/**'],
+    minifyHtml          = require('gulp-minify-html'),
+    gulpif              = require('gulp-if'),
+    paths               = { 
                             fonts: ['./bower_components/semantic-ui/dist/themes/**']
                           };
 
@@ -55,7 +55,7 @@ gulp.task('style', function () {
  * Jade to html.
  */
 gulp.task('templates', function () {
-    return gulp.src('./src/jade/*.jade')
+    return gulp.src('./src/*.jade')
         .pipe(jade({
             locals: {},
             pretty: true
@@ -73,15 +73,6 @@ gulp.task('templates', function () {
 gulp.task('images', function () {
     gulp.src('./src/img/**')
         .pipe(gulp.dest(conf_image_dest));
-});
-
-/**
- * Move bower components into library for the client.
- Deprecated.
- */
-gulp.task('bower', function () {
-    gulp.src(paths.semanticui).pipe(gulp.dest(conf_bower_dest));
-    gulp.src(paths.jquery).pipe(gulp.dest(conf_bower_dest));
 });
 
 /**
@@ -121,11 +112,11 @@ gulp.task('html', ['style', 'coffee', 'scripts', 'templates', 'images'], functio
     var assets = useref.assets({searchPath: '{.src, .bower_components}'});
     return gulp.src('dist/*.html')
         .pipe(assets)
-        .pipe(load.if('*.js', load.uglify()))
-        .pipe(load.if('*.css', load.minifyCss({compatibility: 'ie8'})))
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', minifyCss({compatibility: 'ie8'})))
         .pipe(assets.restore())
-        .pipe(load.useref())
-        .pipe(load.if('*.html', load.minifyHtml({conditionals: true, loose: true})))
+        .pipe(useref())
+        .pipe(gulpif('*.html', minifyHtml({conditionals: true, loose: true})))
         .pipe(gulp.dest(conf_url_dest));
 });
 

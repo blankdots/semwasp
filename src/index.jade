@@ -11,6 +11,23 @@ html(lang="en")
     link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/reset.min.css')
     link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/site.css')
     link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/grid.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/menu.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/input.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/dropdown.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/icon.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/button.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/transition.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/popup.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/divider.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/segment.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/card.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/icon.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/image.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/table.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/label.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/rating.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/dimmer.css')
+    link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/components/reveal.css')
     // endbuild
     // bower:css
     // endbower
@@ -19,9 +36,21 @@ html(lang="en")
     // endbuild
     title Semantic UI Front-End Page
   body
+    
+    h1 Semantic-UI Theming Examples
+    h2.ui.dividing.header Site
     include ./includes/basic.jade
+    h2.ui.dividing.header Menu
     include ./includes/menu.jade
-
+    h2.ui.dividing.header Buttons
+    include ./includes/button.jade
+    h2.ui.dividing.header Table
+    include ./includes/table.jade
+    h2.ui.dividing.header Input
+    include ./includes/input.jade
+    h2.ui.dividing.header Card
+    include ./includes/card.jade
+    
   // build:js js/vendor.js
   // bower:js
   // endbower
@@ -32,8 +61,12 @@ html(lang="en")
   script(type='text/javascript', src='../bower_components/semantic-ui/dist/semantic.min.js')
   // endbuild
   // build:js js/plugins.js
-
-  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/modal.min.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/popup.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/modal.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/transition.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/dropdown.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/dimmer.js')
+  script(type='text/javascript', src='../bower_components/semantic-ui/dist/components/rating.js')
   // endbuild
   // build:js js/main.js
   script(type='text/javascript', src='js/main.js')

@@ -156,6 +156,7 @@ gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function 
     gulp.watch('./src/jade/**/*.jade', ['templates']);
     gulp.watch('./src/js/*.js', ['scripts']); //in case there will be JavaScript
     gulp.watch('./src/js/*.coffee', ['coffee']);
+    gulp.watch('./src/img/**', ['images']);
     gulp.watch('./dist/*html').on('change', reload);
     gulputil.log(gulputil.colors.inverse("All done! We're up and running."));
 });

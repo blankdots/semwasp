@@ -8,8 +8,8 @@ RUN npm install -g bower gulp
 #Dockerfile maintainer
 MAINTAINER blankdots <blankdots@gmail.com>
 
-#Expose port 8000 for WebVOWL
-#Expose port 35729 for livereload
+#Expose port 9001 for FrontEnd
+#Expose port 3000 for browsersync
 EXPOSE 3000 9001
 
 WORKDIR /
@@ -26,4 +26,4 @@ ENV HOME /frontend
 WORKDIR /frontend
 
 # Define default command
-CMD ["gulp", "watch"]
+CMD ["gulp", "dev"]

@@ -1,5 +1,4 @@
 var /* BEGIN ENVIRONMENT CONFIG */
-    conf_bower_dest     = './dist/lib',                     // where to output the bower directory
     conf_fonts_dest     = './dist/css/themes',              // where to output the fonts directory
     conf_image_dest     = './dist/img',                     // where to output images
     conf_output_dest    = './dist',                         // the base output directory

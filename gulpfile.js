@@ -1,5 +1,5 @@
 var /* BEGIN ENVIRONMENT CONFIG */
-    conf_fonts_dest     = './dist/css/themes',              // where to output the fonts directory
+    conf_fonts_dest     = './dist/themes',              // where to output the fonts directory
     conf_image_dest     = './dist/img',                     // where to output images
     conf_output_dest    = './dist',                         // the base output directory
     conf_script_dest    = './dist/js',                      // where to output scripts
@@ -46,9 +46,9 @@ gulp.task('style', function () {
     return gulp.src('./src/scss/*.scss')
         .pipe(changed(conf_style_dest))
         .pipe(sass({'outputStyle': 'compressed'}))
-        .pipe(gulp.dest(conf_style_dest))
-        .pipe(reload({stream:true}));
+        .pipe(gulp.dest(conf_style_dest));
 });
+gulp.task('css-watch', ['style'], reload);
 
 /**
  * Jade to html.
@@ -62,25 +62,27 @@ gulp.task('templates', function () {
         .pipe(wiredep({
           directory: './bower_components'
         }))
-        .pipe(gulp.dest(conf_template_dest))
-        .pipe(reload({stream:true}));
+        .pipe(gulp.dest(conf_template_dest));
 });
+gulp.task('jade-watch', ['templates'], reload);
 
 /**
  * Move images.
  */
 gulp.task('images', function () {
-    gulp.src('./src/img/**')
-        .pipe(gulp.dest(conf_image_dest));
+   return gulp.src('./src/img/*.+(gif|ico|jpg|jpeg|png)')
+            .pipe(gulp.dest(conf_image_dest));
 });
+gulp.task('img-watch', ['images'], reload);
 
 /**
  * Move fonts components into css for the client.
  */
 gulp.task('fonts', function () {
-    gulp.src(paths.fonts).pipe(gulp.dest(conf_fonts_dest));
+    return gulp.src(paths.fonts)
+            .pipe(gulp.dest(conf_fonts_dest));
 });
-
+gulp.task('fonts-watch', ['fonts'], reload);
 
 /**
  * Compress javascript.
@@ -89,20 +91,20 @@ gulp.task('scripts', function () {
     return gulp.src('./src/js/*.js')
         .pipe(changed(conf_script_dest))
         .pipe(uglify())
-        .pipe(gulp.dest(conf_script_dest))
-        .pipe(reload({stream:true}));
+        .pipe(gulp.dest(conf_script_dest));
 
 });
+gulp.task('js-watch', ['scripts'], reload);
 
 /**
  * Coffeescript to javascript.
  */
 gulp.task('coffee', function() {
-  gulp.src('./src/js/*')
+  return gulp.src('./src/js/*')
     .pipe(gulpif(/[.]coffee$/, coffee()))
-    .pipe(gulp.dest(conf_script_dest))
-    .pipe(reload({stream:true}));
+    .pipe(gulp.dest(conf_script_dest));
 });
+gulp.task('coffee-watch', ['coffee'], reload);
 
 /**
  * All build tasks.
@@ -115,7 +117,7 @@ gulp.task('html', ['style', 'coffee', 'scripts', 'templates', 'images'], functio
         .pipe(gulpif('*.css', minifyCss({compatibility: 'ie8'})))
         .pipe(assets.restore())
         .pipe(useref())
-        .pipe(gulpif('*.html', minifyHtml({conditionals: true, loose: true})))
+        // .pipe(gulpif('*.html', minifyHtml({conditionals: true, loose: true})))
         .pipe(gulp.dest(conf_url_dest));
 });
 
@@ -151,12 +153,12 @@ gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function 
         port: 3000
 
     })
-    gulp.watch('./src/scss/*.scss', ['style']);
-    gulp.watch('./src/jade/**/*.jade', ['templates']);
-    gulp.watch('./src/js/*.js', ['scripts']); //in case there will be JavaScript
-    gulp.watch('./src/js/*.coffee', ['coffee']);
-    gulp.watch('./src/img/**', ['images']);
-    gulp.watch('./dist/*html').on('change', reload);
+    gulp.watch('./src/img/*.+(gif|ico|jpg|jpeg|png)', ['img-watch']);
+    gulp.watch('./src/scss/*.scss', ['css-watch']);
+    gulp.watch('./src/*.jade', ['jade-watch']);
+    gulp.watch('./src/includes/*.jade', ['jade-watch']);
+    gulp.watch('./src/js/*.js', ['js-watch']); //in case there will be JavaScript
+    gulp.watch('./src/js/*.coffee', ['coffee-watch']);
     gulputil.log(gulputil.colors.inverse("All done! We're up and running."));
 });
 

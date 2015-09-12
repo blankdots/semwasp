@@ -1,5 +1,5 @@
 var /* BEGIN ENVIRONMENT CONFIG */
-    conf_fonts_dest     = './dist/themes',              // where to output the fonts directory
+    conf_fonts_dest     = './dist/themes',                  // where to output the fonts directory
     conf_image_dest     = './dist/img',                     // where to output images
     conf_output_dest    = './dist',                         // the base output directory
     conf_script_dest    = './dist/js',                      // where to output scripts
@@ -51,7 +51,7 @@ gulp.task('style', function () {
 gulp.task('css-watch', ['style'], reload);
 
 /**
- * Jade to html.
+ * Jade to HTML.
  */
 gulp.task('templates', function () {
     return gulp.src('./src/*.jade')
@@ -65,6 +65,14 @@ gulp.task('templates', function () {
         .pipe(gulp.dest(conf_template_dest));
 });
 gulp.task('jade-watch', ['templates'], reload);
+/**
+ * Move HTML.
+ */
+gulp.task('basichtml', function () {
+   return gulp.src('./src/*.+(html|htm|xhtml)')
+            .pipe(gulp.dest(conf_template_dest));
+});
+gulp.task('html-watch', ['basichtml'], reload);
 
 /**
  * Move images.
@@ -125,6 +133,7 @@ gulp.task('html', ['style', 'coffee', 'scripts', 'templates', 'images'], functio
  * Build FrontEnd and distribute.
  */
 gulp.task('build', ['html','fonts']);
+
 /**
  * Remove dist directory.
  */
@@ -135,7 +144,6 @@ gulp.task('clean', function (cb) {
 /**
  * Watch for chaned files and develop in peace
  */
-// TODO: move html task only to build do not use build here
 gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function () {
     browsersync.init({
         server: {
@@ -157,6 +165,8 @@ gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function 
     gulp.watch('./src/scss/*.scss', ['css-watch']);
     gulp.watch('./src/*.jade', ['jade-watch']);
     gulp.watch('./src/includes/*.jade', ['jade-watch']);
+    gulp.watch('./src/*.(html|htm|xhtml)', ['html-watch']); //in case there will be HTML
+    gulp.watch('./src/includes/*.(html|htm|xhtml)', ['html-watch']); //in case there will be HTML
     gulp.watch('./src/js/*.js', ['js-watch']); //in case there will be JavaScript
     gulp.watch('./src/js/*.coffee', ['coffee-watch']);
     gulputil.log(gulputil.colors.inverse("All done! We're up and running."));

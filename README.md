@@ -1,6 +1,6 @@
-## gulp-SemanticUIFrontEnd - Static Webpage skeleton  [![Build Status](https://travis-ci.org/blankdots/gulp-SemanticUIFrontEnd.svg?branch=master)](https://travis-ci.org/blankdots/gulp-SemanticUIFrontEnd)
+## semwasp - Semantic Web App Skeleton Prospect [![Build Status](https://travis-ci.org/blankdots/semwasp.svg?branch=master)](https://travis-ci.org/blankdots/semwasp)
 
-Static Webpage skeleton generated with gulp and supports semantic-ui from the start (consider it as work in progress).
+Skeleton generated with gulp and supports semantic-ui from the start (consider it as work in progress).
 Makes use of following:
 
 * gulp streaming build system http://gulpjs.com/
@@ -9,72 +9,50 @@ Makes use of following:
 * coffee-script http://coffeescript.org/
 * semantic-ui v2.0 http://www.semantic-ui.com/ - awesome User Interface development framework
 * browser-sync http://www.browsersync.io/ synchronized browser testing tool
+
+TO DO:
+
+* Choose one: react JS, knockout JS, Ember JS, Angular JS or other (Work in progress)
 * cucumber https://cucumber.io/ (Work in progress)
+* Optimize delivery of images and 
+* Localization
+* Test runner for TDD karma JS 
+* Better Examples (Work in progress)
 
 Author: www.blankdots.com
 
 ### Instructions
 
-##### Clone the repository
+##### How to get started
 
 ```
-git clone git@github.com:blankdots/gulp-SemanticUIFrontEnd.git
-```
-
-##### Install dependencies:
-
-```
+git clone git@github.com:blankdots/semwasp.git
 npm install
+gulp build
 ```
 
-> this will run `bower install` automatically with all necessary dependencies
+> `npm install` will run `bower install` automatically with all necessary dependencies
 
-##### Develop:
+
+The files build will be available in `.\dist` folder.
+
+
+##### How to to develop
 
 ```
+git clone git@github.com:blankdots/semwasp.git
+npm install
 gulp dev
 ```
 
 The browser will start a server at the address `http://localhost:3000` and the bower-sync at `http://localhost:9001` - both of these can be configured in the gulpfile.js file.
 
-The bower dependencies will be in the `.\dist\lib` folder (for each bower component the dependencies are copied in that folder)
+In order to clean build and start fresh use `gulp clean`
 
-##### Build
+###### How to to add dependencies
 
-Building output:
 
-```
-gulp build
-```
-
-The file build will be available in `.\dist` folder.
-
-In order to clean build use:
-
-```
-gulp clean
-```
 
 ### License
 
 The MIT License (MIT)
-
-Copyright (c) 2013-2014 blankdots@gmail.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.

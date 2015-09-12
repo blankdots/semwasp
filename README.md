@@ -51,7 +51,37 @@ In order to clean build and start fresh use `gulp clean`
 
 ###### How to to add dependencies
 
+```
+bower install d3 --save
+```
 
+In `index.jade` under the following lines the dependencies are/can be added like this:
+
+```
+	// build:js js/vendor.js
+	// bower:js
+	// endbower
+	//endbuild
+	// build:js js/plugins.js
+	// endbuild
+	// build:js js/main.js
+	script(type='text/javascript', src='js/main.js')
+	// endbuild
+```
+
+The bower dependencies are added in the `vendor.js` on the build and for additional plugins unavailable via bower the plugins and other JavaScript code can be added under:
+
+```
+	// build:js js/plugins.js
+	cript(type='text/javascript', src='include/add_plugin.js')
+	// endbuild
+	// build:js js/main.js
+	script(type='text/javascript', src='js/app.js')
+	script(type='text/javascript', src='js/main.js')
+	// endbuild
+```
+
+Depending where the dependencies are added these will be compiled under one file such as `plugins.js` or `main.js` .
 
 ### License
 

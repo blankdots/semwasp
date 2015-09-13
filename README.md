@@ -11,13 +11,13 @@ Makes use of following:
 * browser-sync http://www.browsersync.io/ synchronized browser testing tool
 
 TO DO:
-
+* Provide setup wizard and themes options
+* Better Examples (Work in progress)
 * Choose one: react JS, knockout JS, Ember JS, Angular JS or other (Work in progress)
 * cucumber https://cucumber.io/ (Work in progress)
-* Optimize delivery of images and 
+* Optimize delivery of images and other resources
 * Localization
-* Test runner for TDD karma JS 
-* Better Examples (Work in progress)
+* Test runner for TDD - choose one: karma JS or other 
 
 Author: www.blankdots.com
 
@@ -35,7 +35,6 @@ gulp build
 
 
 The files build will be available in `.\dist` folder.
-
 
 ##### How to to develop
 

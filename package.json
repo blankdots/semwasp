@@ -1,7 +1,7 @@
 {
-  "name": "gulp-SemanticUIFrontEnd",
+  "name": "semwasp",
   "version": "0.1.0",
-  "description": "SemanticUIFrontEnd, front-end build environment for automating building awesome frontends",
+  "description": "semwasp Semantic Web Application Skeleton Prospect, front-end build environment for automating building awesome frontends",
   "keywords": [
     "gulp",
     "jade",

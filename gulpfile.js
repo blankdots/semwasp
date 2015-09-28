@@ -122,7 +122,7 @@ gulp.task('html', ['style', 'coffee', 'scripts', 'templates', 'images'], functio
     return gulp.src('dist/*.html')
         .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss({compatibility: 'ie8'})))
+        // .pipe(gulpif('*.css', minifyCss({compatibility: 'ie8'})))
         .pipe(assets.restore())
         .pipe(useref())
         // .pipe(gulpif('*.html', minifyHtml({conditionals: true, loose: true})))

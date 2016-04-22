@@ -11,6 +11,7 @@ Makes use of following:
 * browser-sync http://www.browsersync.io/ synchronized browser testing tool
 
 TO DO:
+* alternative? http://webpack.github.io/
 * Provide setup wizard and themes options
 * Better Examples (Work in progress)
 * Choose one: react JS, knockout JS, Ember JS, Angular JS or other (Work in progress)

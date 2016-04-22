@@ -1,5 +1,5 @@
 var /* BEGIN ENVIRONMENT CONFIG */
-    conf_fonts_dest     = './dist/themes',                  // where to output the fonts directory
+    conf_fonts_dest     = './dist/css/themes',              // where to output the fonts directory
     conf_image_dest     = './dist/img',                     // where to output images
     conf_output_dest    = './dist',                         // the base output directory
     conf_script_dest    = './dist/js',                      // where to output scripts
@@ -14,7 +14,7 @@ var /* BEGIN ENVIRONMENT CONFIG */
     gulp                = require('gulp'),
     gulpif              = require('gulp-if'),
     gulputil            = require('gulp-util'),
-    jade                = require('gulp-jade'),
+    pug                 = require('gulp-pug'),
     path                = require('path'),
     reload              = browsersync.reload,
     rimraf              = require('rimraf'),
@@ -23,8 +23,9 @@ var /* BEGIN ENVIRONMENT CONFIG */
     coffee              = require('gulp-coffee'),
     useref              = require('gulp-useref'),
     wiredep             = require('wiredep').stream,
-    minifyCss           = require('gulp-minify-css'),
+    minifyCss           = require('gulp-clean-css'),
     minifyHtml          = require('gulp-minify-html'),
+    autoprefixer        = require('gulp-autoprefixer'),
     gulpif              = require('gulp-if'),
     paths               = { 
                             fonts: ['./bower_components/semantic-ui/dist/themes/**']
@@ -46,16 +47,20 @@ gulp.task('style', function () {
     return gulp.src('./src/scss/*.scss')
         .pipe(changed(conf_style_dest))
         .pipe(sass({'outputStyle': 'compressed'}))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         .pipe(gulp.dest(conf_style_dest));
 });
 gulp.task('css-watch', ['style'], reload);
 
 /**
- * Jade to HTML.
+ * pug to HTML.
  */
 gulp.task('templates', function () {
-    return gulp.src('./src/*.jade')
-        .pipe(jade({
+    return gulp.src('./src/*.pug')
+        .pipe(pug({
             locals: {},
             pretty: true
         }))
@@ -64,7 +69,7 @@ gulp.task('templates', function () {
         }))
         .pipe(gulp.dest(conf_template_dest));
 });
-gulp.task('jade-watch', ['templates'], reload);
+gulp.task('pug-watch', ['templates'], reload);
 /**
  * Move HTML.
  */
@@ -78,7 +83,7 @@ gulp.task('html-watch', ['basichtml'], reload);
  * Move images.
  */
 gulp.task('images', function () {
-   return gulp.src('./src/img/*.+(gif|ico|jpg|jpeg|png)')
+   return gulp.src('./src/img/*.+(gif|ico|jpg|jpeg|png|svg)')
             .pipe(gulp.dest(conf_image_dest));
 });
 gulp.task('img-watch', ['images'], reload);
@@ -118,12 +123,9 @@ gulp.task('coffee-watch', ['coffee'], reload);
  * All build tasks.
  */
 gulp.task('html', ['style', 'coffee', 'scripts', 'templates', 'images'], function () {
-    var assets = useref.assets({searchPath: '{.src, .bower_components}'});
     return gulp.src('dist/*.html')
-        .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
         // .pipe(gulpif('*.css', minifyCss({compatibility: 'ie8'})))
-        .pipe(assets.restore())
         .pipe(useref())
         // .pipe(gulpif('*.html', minifyHtml({conditionals: true, loose: true})))
         .pipe(gulp.dest(conf_url_dest));
@@ -149,7 +151,8 @@ gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function 
         server: {
             baseDir:["./src", "./dist"],
             routes: {
-                "/bower_components": "bower_components" // make bower_components accessible
+                "/bower_components": "bower_components", // make bower_components accessible
+                "/node_modules": "node_modules"
             }
         },
         socket: {
@@ -161,14 +164,14 @@ gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function 
         port: 3000
 
     })
-    gulp.watch('./src/img/*.+(gif|ico|jpg|jpeg|png)', ['img-watch']);
-    gulp.watch('./src/scss/*.scss', ['css-watch']);
-    gulp.watch('./src/*.jade', ['jade-watch']);
-    gulp.watch('./src/includes/*.jade', ['jade-watch']);
-    gulp.watch('./src/*.(html|htm|xhtml)', ['html-watch']); //in case there will be HTML
-    gulp.watch('./src/includes/*.(html|htm|xhtml)', ['html-watch']); //in case there will be HTML
-    gulp.watch('./src/js/*.js', ['js-watch']); //in case there will be JavaScript
-    gulp.watch('./src/js/*.coffee', ['coffee-watch']);
+    gulp.watch('./src/img/*.+(gif|ico|jpg|jpeg|png|svg)', ['img-watch'], {events: ['add', 'change', 'unlink']});
+    gulp.watch('./src/scss/*.scss', ['css-watch'], {events: ['add', 'change', 'unlink']});
+    gulp.watch('./src/*.pug', ['pug-watch'], {events: ['add', 'change', 'unlink']});
+    gulp.watch('./src/includes/*.pug', ['pug-watch'], {events: ['add', 'change', 'unlink']});
+    gulp.watch('./src/*.(html|htm|xhtml)', ['html-watch'], {events: ['add', 'change', 'unlink']}); //in case there will be HTML
+    gulp.watch('./src/includes/*.(html|htm|xhtml)', ['html-watch'], {events: ['add', 'change', 'unlink']}); //in case there will be HTML
+    gulp.watch('./src/js/*.js', ['js-watch'], {events: ['add', 'change', 'unlink']}); //in case there will be JavaScript
+    gulp.watch('./src/js/*.coffee', ['coffee-watch'], {events: ['add', 'change', 'unlink']});
     gulputil.log(gulputil.colors.inverse("All done! We're up and running."));
 });
 

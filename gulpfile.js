@@ -146,7 +146,7 @@ gulp.task('clean', function (cb) {
 /**
  * Watch for chaned files and develop in peace
  */
-gulp.task('dev', ['style', 'templates', 'images', 'scripts','coffee'], function () {
+gulp.task('dev', ['html','fonts','style', 'templates', 'images', 'scripts','coffee'], function () {
     browsersync.init({
         server: {
             baseDir:["./src", "./dist"],

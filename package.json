@@ -31,10 +31,7 @@
   },
   "devDependencies": {
     "better-console": ">=0.2.4",
-    "browser-sync": ">=2.7.13",
-    "coffee-script": ">=1.8.0",
-    "cucumber": "latest",
-    "fs": "0.0.2",
+    "coffee-script": ">=1.10.0",
     "gulp": ">=3.9.0",
     "gulp-autoprefixer": ">=3.1.0",
     "gulp-changed": ">=1.2.1",
@@ -50,10 +47,8 @@
     "gulp-sass": ">=2.0.3",
     "gulp-tasks": ">=0.0.2",
     "gulp-uglify": ">=1.2.0",
-    "gulp-useref": ">=1.2.0",
     "gulp-util": ">=3.0.6",
     "gulp-watch": ">=4.2.4",
-    "pug": "^2.0.0-alpha6",
     "rimraf": ">=2.4.1",
     "wiredep": ">=4.0.0"
   },

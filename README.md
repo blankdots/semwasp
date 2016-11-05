@@ -4,21 +4,20 @@ Skeleton generated with gulp and supports semantic-ui from the start (consider i
 Makes use of following:
 
 * gulp streaming build system http://gulpjs.com/
-* jade template engine http://jade-lang.com/
+* jade template engine https://pugjs.org/
 * scss Sass http://sass-lang.com/
 * coffee-script http://coffeescript.org/
 * semantic-ui v2.0 http://www.semantic-ui.com/ - awesome User Interface development framework
 * browser-sync http://www.browsersync.io/ synchronized browser testing tool
 
 TO DO:
-* alternative? http://webpack.github.io/
+* alternative ? http://webpack.github.io/
 * Provide setup wizard and themes options
 * Better Examples (Work in progress)
-* Choose one: react JS, knockout JS, Ember JS, Angular JS or other (Work in progress)
-* cucumber https://cucumber.io/ (Work in progress)
+* Branch with https://facebook.github.io/react/
 * Optimize delivery of images and other resources
 * Localization
-* Test runner for TDD - choose one: karma JS or other 
+* Test with https://cucumber.io/
 
 Author: www.blankdots.com
 

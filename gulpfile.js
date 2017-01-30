@@ -1,14 +1,14 @@
-var /* BEGIN ENVIRONMENT CONFIG */
+const /* BEGIN ENVIRONMENT CONFIG */
     conf_fonts_dest     = './dist/css/themes',              // where to output the fonts directory
     conf_image_dest     = './dist/img',                     // where to output images
     conf_output_dest    = './dist',                         // the base output directory
     conf_script_dest    = './dist/js',                      // where to output scripts
     conf_style_dest     = './dist/css',                     // where to output styles
-    conf_template_dest  = './dist',                         // where to output html templates
     conf_url_dest       = './dist',                         // the local URL of the project
     /* END ENVIRONMENT CONFIG */
-
+    /* BEGIN DEV ENVIRONMENT CONFIG */
     browsersync         = require('browser-sync'),
+    reload              = browsersync.reload,
     changed             = require('gulp-changed'),
     clean               = false,
     gulp                = require('gulp'),
@@ -16,7 +16,6 @@ var /* BEGIN ENVIRONMENT CONFIG */
     gulputil            = require('gulp-util'),
     pug                 = require('gulp-pug'),
     path                = require('path'),
-    reload              = browsersync.reload,
     rimraf              = require('rimraf'),
     sass                = require('gulp-sass'),
     uglify              = require('gulp-uglify'),
@@ -26,10 +25,12 @@ var /* BEGIN ENVIRONMENT CONFIG */
     minifyCss           = require('gulp-clean-css'),
     minifyHtml          = require('gulp-minify-html'),
     autoprefixer        = require('gulp-autoprefixer'),
-    gulpif              = require('gulp-if'),
-    paths               = { 
+    imagemin            = require('gulp-imagemin'),
+    fs                  = require('fs'),
+    paths               = {
                             fonts: ['./bower_components/semantic-ui/dist/themes/**']
                           };
+    /* END DEV ENVIRONMENT CONFIG */
 
 /**
  * Check to see if --vars were set.
@@ -39,6 +40,12 @@ process.argv.forEach(function (val) {
         clean = true;
     }
 });
+
+var getContent = function getContent(file) {
+  // First I want to read the file
+  var content = JSON.parse(fs.readFileSync(file, 'utf8'))
+  return content
+}
 
 /**
  * Compile scss as compressed css.
@@ -58,17 +65,40 @@ gulp.task('css-watch', ['style'], reload);
 /**
  * pug to HTML.
  */
+
 gulp.task('templates', function () {
-    return gulp.src('./src/*.pug')
-        .pipe(pug({
-            locals: {},
-            pretty: true
-        }))
-        .pipe(wiredep({
-          directory: './bower_components'
-        }))
-        .pipe(gulp.dest(conf_template_dest));
+  var defaultLang = 'en'
+  fs.readdir('./src/locale/',function(err,files){
+        if(err) throw err;
+            files.forEach(function(file){
+                var language = file.split('.')[0];
+                if (language == defaultLang) {
+                  return gulp.src('./src/*.pug')
+                      .pipe(pug({
+                          data: getContent('./src/locale/'+defaultLang+'.json'),
+                          locals: {},
+                          pretty: true
+                      }))
+                      .pipe(wiredep({
+                        directory: './bower_components'
+                      }))
+                      .pipe(gulp.dest(conf_output_dest));
+                } else {
+                  return gulp.src('./src/*.pug')
+                      .pipe(pug({
+                          data: getContent('./src/locale/'+language+'.json'),
+                          locals: {},
+                          pretty: true
+                      }))
+                      .pipe(wiredep({
+                        directory: './bower_components'
+                      }))
+                      .pipe(gulp.dest(conf_output_dest + '/' + language + '/'));
+                }
+        });
+    });
 });
+
 gulp.task('pug-watch', ['templates'], reload);
 /**
  * Move HTML.
@@ -84,6 +114,7 @@ gulp.task('html-watch', ['basichtml'], reload);
  */
 gulp.task('images', function () {
    return gulp.src('./src/img/*.+(gif|ico|jpg|jpeg|png|svg)')
+            .pipe(imagemin())
             .pipe(gulp.dest(conf_image_dest));
 });
 gulp.task('img-watch', ['images'], reload);
@@ -174,7 +205,6 @@ gulp.task('dev', ['html','fonts','style', 'templates', 'images', 'scripts','coff
     gulp.watch('./src/js/*.coffee', ['coffee-watch'], {events: ['add', 'change', 'unlink']});
     gulputil.log(gulputil.colors.inverse("All done! We're up and running."));
 });
-
 
 /**
  * Default task

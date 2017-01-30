@@ -5,7 +5,7 @@ html(lang="en")
     // bower:css
     // endbower
     // endbuild
-    
+
     // build:css css/plugins.css
     link(rel="stylesheet", type="text/css", href='../bower_components/semantic-ui/dist/semantic.min.css')
     // endbuild
@@ -16,10 +16,13 @@ html(lang="en")
     // endbuild
     title Semantic UI Front-End Page
   body
-    
+
     h1 Semantic-UI Theming Examples
     h2.ui.dividing.header Site
-    
+
+    h3 #{hello}
+    p Using locale #{title}
+
     include ./includes/basic.pug
     h2.ui.dividing.header Menu
     include ./includes/menu.pug
@@ -31,7 +34,7 @@ html(lang="en")
     include ./includes/input.pug
     h2.ui.dividing.header Card
     include ./includes/card.pug
-    
+
   // build:js js/vendor.js
   // bower:js
   // endbower

@@ -13,8 +13,8 @@ Makes use of following:
 
 Work in Progress:
 * Better Examples
-* Localization
-* Test with Karma
+* Localisation
+* Tests with Karma
 
 To DO:
 * Provide setup wizard and themes options

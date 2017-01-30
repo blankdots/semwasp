@@ -1,0 +1,8 @@
+{
+  "title": "Example",
+  "hello": "Hello World!",
+  "status": {
+    "code": "E390",
+    "msg": "Some message."
+  }
+}

@@ -81,7 +81,3 @@ The bower dependencies are added in the `vendor.js` on the build and for additio
 ```
 
 Depending where the dependencies are added these will be compiled under one file such as `plugins.js` or `main.js` .
-
-### License
-
-The MIT License (MIT)
